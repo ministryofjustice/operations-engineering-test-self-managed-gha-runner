@@ -25,20 +25,17 @@ spec:
         image: myoung34/github-runner:latest
         env:
         - name: START_DOCKER_SERVICE
-          value: "true"
+          value: "false"
         - name: ACCESS_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: actions-runner
-              key: ACCESS_TOKEN
+          value: ${ACCESS_TOKEN}
         - name: RUNNER_SCOPE
           value: "org"
         - name: ORG_NAME
-          value: octokode
+          value: ministryofjustice-test
         - name: LABELS
-          value: my-label,other-label
+          value: operatione-engineering
         - name: RUNNER_NAME_PREFIX
-          value: foo
+          value: operations-engineering-self-managed-gha-runner
         - name: RUNNER_NAME
           valueFrom:
             fieldRef:
@@ -46,14 +43,14 @@ spec:
         - name: RUNNER_WORKDIR
           value: /tmp/github-runner-your-repo
         - name: RUNNER_GROUP
-          value: my-group
+          value: operations-engineering-runners
         volumeMounts:
         - name: containerdsock
           mountPath: /run/containerd/containerd.sock
         - name: workdir
           mountPath: /tmp/github-runner-your-repo
         securityContext:
-          privileged: true # Required if you're enabling docker
+          privileged: false
         resources:
           limits:
             cpu: 2
