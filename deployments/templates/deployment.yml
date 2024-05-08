@@ -13,10 +13,6 @@ spec:
       labels:
         app: actions-runner
     spec:
-      volumes:
-      - name: workdir
-        hostPath:
-          path: /tmp/github-runner-your-repo
       containers:
       - name: runner
         image: myoung34/github-runner:latest
@@ -41,9 +37,6 @@ spec:
           value: /tmp/github-runner-your-repo
         - name: RUNNER_GROUP
           value: operations-engineering-runners
-        volumeMounts:
-        - name: workdir
-          mountPath: /tmp/github-runner-your-repo
         securityContext:
           privileged: false
         resources:
