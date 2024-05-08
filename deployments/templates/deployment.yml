@@ -46,3 +46,4 @@ spec:
           requests:
             cpu: 2
             memory: 256Mi
+            
