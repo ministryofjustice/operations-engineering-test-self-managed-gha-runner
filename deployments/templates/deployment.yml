@@ -38,7 +38,7 @@ spec:
         - name: RUNNER_GROUP
           value: operations-engineering-runners
         - name: RUN_AS_ROOT
-          value: false
+          value: 'false'
         resources:
           limits:
             cpu: 2
