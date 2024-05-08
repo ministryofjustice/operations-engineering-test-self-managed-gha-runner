@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  ecr:
+  deploy-runner:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
