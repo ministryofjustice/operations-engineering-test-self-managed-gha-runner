@@ -39,6 +39,8 @@ spec:
           value: operations-engineering-runners
         - name: RUN_AS_ROOT
           value: 'false'
+        securityContext:
+          runAsNonRoot: true
         resources:
           limits:
             cpu: 2
