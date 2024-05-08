@@ -37,8 +37,6 @@ spec:
           value: /tmp/github-runner-your-repo
         - name: RUNNER_GROUP
           value: operations-engineering-runners
-        securityContext:
-          privileged: true
         resources:
           limits:
             cpu: 2
