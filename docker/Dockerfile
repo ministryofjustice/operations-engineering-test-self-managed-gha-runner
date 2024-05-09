@@ -37,8 +37,7 @@ apt-get install --yes --no-install-recommends \
   "git=1:2.43.0-1ubuntu7" \
   "jq=1.7.1-3build1" \
   "libicu-dev=74.2-1ubuntu3" \
-  "lsb-release=12.0-2" \
-  software-properties-common
+  "lsb-release=12.0-2" 
 
 apt-get clean
 
@@ -57,13 +56,9 @@ EOF
 RUN <<EOF
 
 # Configure rootless podman
+apt-get update && apt-get install --yes --no-install-recommends podman
 
-source /etc/os-release
-
-sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
-wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_${VERSION_ID}/Release.key -O- | apt-key add -
-apt-get update -qq
-apt-get -qq --yes install podman
+usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
 EOF
 
