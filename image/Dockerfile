@@ -26,6 +26,7 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
   libcap2-bin \
   lsb-release \
   uidmap \
+  slirp4netns \
   podman && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
@@ -44,9 +45,6 @@ RUN chmod u+s /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
 USER ${CONTAINER_USER}
 
 # test podman
-
-RUN cd /proc && ls -l
-
 RUN podman info
 
 WORKDIR ${CONTAINER_HOME}
