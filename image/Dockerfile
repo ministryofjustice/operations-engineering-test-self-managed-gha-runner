@@ -43,3 +43,4 @@ USER ${CONTAINER_USER}
 WORKDIR ${CONTAINER_HOME}
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
