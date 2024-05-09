@@ -53,17 +53,12 @@ tar --extract --gzip --file="actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.
 
 rm --force "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
 
-whoami 
-
-ls -ld /
-
-mount --make-shared /
-
+# test podman
 podman info
 
 EOF
 
-COPY --chown=nobody:nobody --chmod=0755 docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY --chown=nobody:nobody --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 USER ${CONTAINER_USER}
 

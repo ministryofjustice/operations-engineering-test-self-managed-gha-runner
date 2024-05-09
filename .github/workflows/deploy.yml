@@ -21,8 +21,8 @@ jobs:
       - uses: aws-actions/amazon-ecr-login@v2
         id: login-ecr
       - run: |
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG . -f docker/Dockerfile
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          podman build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG . -f image/Dockerfile
+          podman push $REGISTRY/$REPOSITORY:$IMAGE_TAG
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: ${{ vars.ECR_REPOSITORY }}
