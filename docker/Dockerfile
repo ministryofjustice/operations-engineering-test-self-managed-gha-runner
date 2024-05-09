@@ -54,11 +54,7 @@ tar --extract --gzip --file="actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.
 
 rm --force "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
 
-EOF
-
-RUN <<EOF
-
-sudo mount --make-shared /
+podman info
 
 EOF
 
