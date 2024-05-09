@@ -31,13 +31,13 @@ chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} ${CONTAINER_HOME}
 apt-get update
 
 apt-get install --yes --no-install-recommends \
-  "apt-transport-https=2.7.14build2" \
-  "ca-certificates=20240203" \
-  "curl=8.5.0-2ubuntu10.1" \
-  "git=1:2.43.0-1ubuntu7" \
-  "jq=1.7.1-3build1" \
-  "libicu-dev=74.2-1ubuntu3" \
-  "lsb-release=12.0-2" \
+  apt-transport-https \
+  ca-certificates \
+  curl \
+  git \
+  jq \
+  libicu-dev \
+  lsb-release \
   podman
 
 apt-get clean
