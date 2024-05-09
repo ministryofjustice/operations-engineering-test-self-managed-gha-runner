@@ -37,8 +37,7 @@ apt-get install --yes --no-install-recommends \
   "git=1:2.43.0-1ubuntu7" \
   "jq=1.7.1-3build1" \
   "libicu-dev=74.2-1ubuntu3" \
-  "lsb-release=12.0-2" \
-  podman
+  "lsb-release=12.0-2"
 
 apt-get clean
 
@@ -52,6 +51,26 @@ echo "${ACTIONS_RUNNER_PKG_SHA}"  "actions-runner-linux-x64-${ACTIONS_RUNNER_VER
 tar --extract --gzip --file="actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz" --directory="${CONTAINER_HOME}"
 
 rm --force "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
+EOF
+
+RUN <<EOF
+
+# Configure rootless podman
+
+sudo add-apt-repository ppa:projectatomic/ppa
+sudo apt-get update
+sudo apt-get install podman uidmap
+echo "runner:10000:65536" | sudo tee /etc/subuid
+echo "runner:10000:65536" | sudo tee /etc/subgid
+echo -e "[registries.search]\nregistries = ['docker.io']" | sudo tee /etc/containers/registries.conf
+
+git clone https://github.com/rootless-containers/slirp4netns
+cd slirp4netns/
+./autogen.sh 
+./configure
+make
+sudo make install
+
 EOF
 
 COPY --chown=nobody:nobody --chmod=0755 docker/entrypoint.sh /usr/local/bin/entrypoint.sh
