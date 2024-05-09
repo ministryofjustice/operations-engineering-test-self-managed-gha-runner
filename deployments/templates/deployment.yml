@@ -15,30 +15,14 @@ spec:
     spec:
       containers:
       - name: runner
-        image: myoung34/github-runner:latest
+        image: ${REGISTRY}/${REPOSITORY}:${IMAGE_TAG}
         env:
-        - name: START_DOCKER_SERVICE
-          value: "false"
         - name: ACCESS_TOKEN
           value: ${ACCESS_TOKEN}
-        - name: RUNNER_SCOPE
-          value: "org"
         - name: ORG_NAME
           value: ministryofjustice-test
         - name: LABELS
           value: operatione-engineering
-        - name: RUNNER_NAME_PREFIX
-          value: operations-engineering-self-managed-gha-runner
-        - name: RUNNER_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: RUNNER_WORKDIR
-          value: /tmp/github-runner-your-repo
-        - name: RUNNER_GROUP
-          value: operations-engineering-runners
-        - name: RUN_AS_ROOT
-          value: 'false'
         securityContext:
           runAsNonRoot: true
           runAsUser: 1000
