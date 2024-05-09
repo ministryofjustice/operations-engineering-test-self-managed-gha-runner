@@ -60,6 +60,8 @@ apt-get update && apt-get install --yes --no-install-recommends podman
 
 usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
+mount --make-rshared /
+
 EOF
 
 COPY --chown=nobody:nobody --chmod=0755 docker/entrypoint.sh /usr/local/bin/entrypoint.sh
