@@ -39,13 +39,13 @@ COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.
 
 RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner && grep runner /etc/subuid /etc/subgid
 
-RUN chown ${CONTAINER_USER}:${CONTAINER_GROUP} /usr/bin/newuidmap && ls -l /usr/bin/newuidmap && getcap /usr/bin/newuidmap
+RUN chmod u+s /usr/bin/newuidmap && ls -l /usr/bin/newuidmap && getcap /usr/bin/newuidmap
 
 USER ${CONTAINER_USER}
 
 # test podman
 
-RUN podman unshare && podman info
+RUN podman info
 
 WORKDIR ${CONTAINER_HOME}
 
