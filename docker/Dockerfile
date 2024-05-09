@@ -20,8 +20,6 @@ apt-get update && apt-get install --yes --no-install-recommends slirp4netns podm
 echo “user.max_user_namespaces=28633” > /etc/sysctl.d/userns.conf 	 
 sysctl -p /etc/sysctl.d/userns.conf
 
-mount --make-rshared /
-
 EOF
 
 RUN <<EOF
