@@ -27,6 +27,7 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
   lsb-release \
   uidmap \
   slirp4netns \
+  sudo \
   podman && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
@@ -42,12 +43,13 @@ RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner && gr
 
 RUN chmod u+s /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
 
+RUN echo "${CONTAINER_USER} ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/${CONTAINER_USER} \
+    && chmod 0440 /etc/sudoers.d/${CONTAINER_USER}
+
 USER ${CONTAINER_USER}
 
 # test podman
-RUN sestatus
-
-RUN podman info
+RUN sudo podman info
 
 WORKDIR ${CONTAINER_HOME}
 
