@@ -23,6 +23,7 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
   git \
   jq \
   libicu-dev \
+  libcap2-bin \
   lsb-release \
   uidmap \
   podman && \
