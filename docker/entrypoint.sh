@@ -30,6 +30,7 @@ else
   ORG_TOKEN="${getRegistrationToken}"
 fi
 
+whoami
 echo "Configuring runner"
 bash "${ACTIONS_RUNNER_DIRECTORY}/config.sh" \
   --unattended \
