@@ -1,5 +1,5 @@
 #checkov:skip=CKV_DOCKER_2:actions/runner does not provider a mechanism for checking the health of the service
-FROM public.ecr.aws/ubuntu/ubuntu@sha256:d55d834bd8b4e1b720fe743ab90a295e8f50ca280aa8c02700a5440461ea160e
+FROM ubuntu:23.10
 
 ENV CONTAINER_USER="runner" \
     CONTAINER_UID="10000" \
@@ -23,8 +23,6 @@ useradd \
   --gid ${CONTAINER_GROUP} \
   --create-home \
   ${CONTAINER_USER}
-
-usermod --add-subuids 200000-201000 --add-subgids 200000-201000 runner
 
 mkdir --parents ${CONTAINER_HOME}
 
