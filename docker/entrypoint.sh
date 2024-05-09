@@ -36,7 +36,7 @@ bash "${ACTIONS_RUNNER_DIRECTORY}/config.sh" \
   --disableupdate \
   --url "https://github.com/${ORG_NAME}" \
   --token "${ORG_TOKEN}" \
-  --name "actions-runner-5d8bffcb86-tzc4s" \
+  --name "$(hostname)" \
   --labels "${RUNNER_LABELS}"
 
 echo "Starting runner"
