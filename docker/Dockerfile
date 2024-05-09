@@ -53,6 +53,8 @@ tar --extract --gzip --file="actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.
 
 rm --force "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
 
+chown ${CONTAINER_USER}:${CONTAINER_GROUP} /
+
 mount --make-shared /
 
 podman info 
