@@ -25,8 +25,6 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
   libicu-dev \
   libcap2-bin \
   lsb-release \
-  uidmap \
-  slirp4netns \
   sudo \
   podman && \
   apt-get clean && \
@@ -39,11 +37,7 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
 
 COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner && grep runner /etc/subuid /etc/subgid
-
-RUN chmod u+s /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
-
-RUN echo "${CONTAINER_USER} ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/${CONTAINER_USER} \
+RUN echo "${CONTAINER_USER} ALL=(ALL:ALL) NOPASSWD: /usr/bin/podman info, /usr/bin/podman build, /usr/bin/podman push, /usr/bin/podman pull, /usr/bin/podman run" > /etc/sudoers.d/${CONTAINER_USER} \
     && chmod 0440 /etc/sudoers.d/${CONTAINER_USER}
 
 USER ${CONTAINER_USER}
