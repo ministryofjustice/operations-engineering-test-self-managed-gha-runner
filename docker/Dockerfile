@@ -24,10 +24,13 @@ useradd \
   --create-home \
   ${CONTAINER_USER}
 
+su - runner
 whoami
 pwd
 
 mkdir --parents ${CONTAINER_HOME}
+
+ls
 
 chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} ${CONTAINER_HOME}
 
