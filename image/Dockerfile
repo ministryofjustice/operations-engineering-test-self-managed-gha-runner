@@ -38,7 +38,7 @@ COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.
 
 RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner && grep runner /etc/subuid /etc/subgid
 
-RUN cat /usr/bin/newuidmap && chown ${CONTAINER_USER}:${CONTAINER_GROUP} /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
+RUN chown nobody:nogroup /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
 
 USER ${CONTAINER_USER}
 
