@@ -21,7 +21,7 @@ spec:
           value: ${ACCESS_TOKEN}
         - name: ORG_NAME
           value: ministryofjustice-test
-        - name: LABELS
+        - name: RUNNER_LABELS
           value: operatione-engineering
         securityContext:
           runAsNonRoot: true
