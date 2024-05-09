@@ -57,12 +57,12 @@ RUN <<EOF
 
 # Configure rootless podman
 
-sudo add-apt-repository ppa:projectatomic/ppa
-sudo apt-get update
-sudo apt-get install podman uidmap
-echo "runner:10000:65536" | sudo tee /etc/subuid
-echo "runner:10000:65536" | sudo tee /etc/subgid
-echo -e "[registries.search]\nregistries = ['docker.io']" | sudo tee /etc/containers/registries.conf
+add-apt-repository ppa:projectatomic/ppa
+apt-get update
+apt-get install --yes --no-install-recommends podman uidmap
+echo "runner:10000:65536" | tee /etc/subuid
+echo "runner:10000:65536" | tee /etc/subgid
+echo -e "[registries.search]\nregistries = ['docker.io']" | tee /etc/containers/registries.conf
 
 git clone https://github.com/rootless-containers/slirp4netns
 cd slirp4netns/
@@ -70,6 +70,7 @@ cd slirp4netns/
 ./configure
 make
 make install
+podman run -it --rm debian bash
 
 EOF
 
