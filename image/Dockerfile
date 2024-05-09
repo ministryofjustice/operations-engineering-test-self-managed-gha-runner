@@ -44,9 +44,8 @@ RUN chown ${CONTAINER_USER}:${CONTAINER_GROUP} /usr/bin/newuidmap && ls -l /usr/
 USER ${CONTAINER_USER}
 
 # test podman
-RUN /usr/bin/newuidmap --version
 
-RUN podman info
+RUN podman unshare && podman info
 
 WORKDIR ${CONTAINER_HOME}
 
