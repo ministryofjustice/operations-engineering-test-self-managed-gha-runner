@@ -54,9 +54,9 @@ tar --extract --gzip --file="actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.
 
 rm --force "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
 
-ls -ld /
+whoami 
 
-cd ~/.config/containers/ && ls
+ls -ld /
 
 podman info
 
