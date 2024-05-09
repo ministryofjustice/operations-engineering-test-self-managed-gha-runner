@@ -36,11 +36,13 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
 
 COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner && grep runner /etc/subuid /etc/subgid
+RUN grep runner /etc/subuid /etc/subgid
 
-RUN chown nobody:nogroup /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
+RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
-RUN newuidmap 11 0 10000 1 1 100000 65536 65537 165536 65536
+RUN grep runner /etc/subuid /etc/subgid
+
+RUN chown ${CONTAINER_USER}:${CONTAINER_GROUP} /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
 
 USER ${CONTAINER_USER}
 
