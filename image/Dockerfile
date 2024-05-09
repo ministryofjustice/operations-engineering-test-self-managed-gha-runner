@@ -13,10 +13,10 @@ ENV CONTAINER_USER="runner" \
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
 RUN <<EOF
-groupadd \
-  --gid ${CONTAINER_GID} \
-  --system \
-  ${CONTAINER_GROUP}
+# groupadd \
+#   --gid ${CONTAINER_GID} \
+#   --system \
+#   ${CONTAINER_GROUP}
 
 useradd \
   --uid ${CONTAINER_UID} \
