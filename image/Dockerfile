@@ -45,7 +45,9 @@ USER ${CONTAINER_USER}
 
 # test podman
 
-RUN podman --log-level debug info
+RUN mount
+
+RUN podman
 
 WORKDIR ${CONTAINER_HOME}
 
