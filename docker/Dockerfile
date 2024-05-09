@@ -37,7 +37,8 @@ apt-get install --yes --no-install-recommends \
   "git=1:2.43.0-1ubuntu7" \
   "jq=1.7.1-3build1" \
   "libicu-dev=74.2-1ubuntu3" \
-  "lsb-release=12.0-2"
+  "lsb-release=12.0-2" \
+  software-properties-common
 
 apt-get clean
 
