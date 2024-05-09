@@ -5,7 +5,7 @@ ENV CONTAINER_USER="runner" \
     CONTAINER_UID="10000" \
     CONTAINER_GROUP="runner" \
     CONTAINER_GID="10000" \
-    CONTAINER_HOME="/Users/runner/actions-runner" \
+    CONTAINER_HOME="/actions-runner" \
     DEBIAN_FRONTEND="noninteractive" \
     ACTIONS_RUNNER_VERSION="2.316.1" \
     ACTIONS_RUNNER_PKG_SHA="d62de2400eeeacd195db91e2ff011bfb646cd5d85545e81d8f78c436183e09a8"
@@ -24,7 +24,10 @@ useradd \
   --create-home \
   ${CONTAINER_USER}
 
-mkdir ${CONTAINER_HOME}
+whoami
+pwd
+
+mkdir --parents ${CONTAINER_HOME}
 
 chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} ${CONTAINER_HOME}
 

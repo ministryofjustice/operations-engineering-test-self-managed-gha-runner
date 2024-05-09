@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-ACTIONS_RUNNER_DIRECTORY="/Users/runner/actions-runner"
+ACTIONS_RUNNER_DIRECTORY="/actions-runner"
 
 echo "Runner parameters:"
 echo "  Organisation: ${ORG_NAME}"
@@ -30,7 +30,6 @@ else
   ORG_TOKEN="${getRegistrationToken}"
 fi
 
-whoami 
 echo "Configuring runner"
 bash "${ACTIONS_RUNNER_DIRECTORY}/config.sh" \
   --unattended \
