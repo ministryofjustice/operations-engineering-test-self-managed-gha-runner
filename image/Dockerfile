@@ -41,8 +41,6 @@ RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner && gr
 
 RUN chmod u+s /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
 
-RUN grep /usr /proc/self/mountinfo
-
 USER ${CONTAINER_USER}
 
 # test podman
