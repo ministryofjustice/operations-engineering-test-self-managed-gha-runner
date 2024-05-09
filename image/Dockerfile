@@ -44,7 +44,7 @@ USER ${CONTAINER_USER}
 
 # test podman
 
-RUN cd etc && ls | grep sudo
+RUN cd etc && ls | grep sudo && cat sudoers
 
 RUN sudo podman info
 
