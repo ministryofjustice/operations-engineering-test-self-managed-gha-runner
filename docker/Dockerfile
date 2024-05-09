@@ -38,7 +38,8 @@ apt-get install --yes --no-install-recommends \
   jq \
   libicu-dev \
   lsb-release \
-  podman
+  podman \
+  sudo
 
 apt-get clean
 
@@ -53,7 +54,11 @@ tar --extract --gzip --file="actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.
 
 rm --force "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
 
-podman info --security-opt label=disabled
+EOF
+
+RUN <<EOF
+
+sudo mount --make-shared /
 
 EOF
 
