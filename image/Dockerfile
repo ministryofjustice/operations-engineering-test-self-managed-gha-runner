@@ -43,6 +43,8 @@ RUN echo "${CONTAINER_USER} ALL=(ALL:ALL) NOPASSWD: /usr/bin/podman info, /usr/b
 USER ${CONTAINER_USER}
 
 # test podman
+RUN cat /etc/sudoers.d/${CONTAINER_USER}
+
 RUN sudo podman info
 
 WORKDIR ${CONTAINER_HOME}
