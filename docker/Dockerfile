@@ -13,6 +13,18 @@ ENV CONTAINER_USER="runner" \
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
 RUN <<EOF
+
+# Configure rootless podman
+apt-get update && apt-get install --yes --no-install-recommends slirp4netns podman
+
+echo “user.max_user_namespaces=28633” > /etc/sysctl.d/userns.conf 	 
+sysctl -p /etc/sysctl.d/userns.conf
+
+mount --make-rshared /
+
+EOF
+
+RUN <<EOF
 groupadd \
   --gid ${CONTAINER_GID} \
   --system \
@@ -51,17 +63,6 @@ echo "${ACTIONS_RUNNER_PKG_SHA}"  "actions-runner-linux-x64-${ACTIONS_RUNNER_VER
 tar --extract --gzip --file="actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz" --directory="${CONTAINER_HOME}"
 
 rm --force "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
-EOF
-
-RUN <<EOF
-
-# Configure rootless podman
-apt-get update && apt-get install --yes --no-install-recommends podman
-
-usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
-
-mount --make-rshared /
-
 EOF
 
 COPY --chown=nobody:nobody --chmod=0755 docker/entrypoint.sh /usr/local/bin/entrypoint.sh
