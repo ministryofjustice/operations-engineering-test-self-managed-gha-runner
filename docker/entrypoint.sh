@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-ACTIONS_RUNNER_DIRECTORY="/actions-runner"
+ACTIONS_RUNNER_DIRECTORY="Users/runner/actions-runner"
 
 echo "Runner parameters:"
 echo "  Organisation: ${ORG_NAME}"
