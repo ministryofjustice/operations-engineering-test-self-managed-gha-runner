@@ -37,7 +37,8 @@ apt-get install --yes --no-install-recommends \
   "git=1:2.43.0-1ubuntu7" \
   "jq=1.7.1-3build1" \
   "libicu-dev=74.2-1ubuntu3" \
-  "lsb-release=12.0-2"
+  "lsb-release=12.0-2" \
+  podman
 
 apt-get clean
 
@@ -51,24 +52,6 @@ echo "${ACTIONS_RUNNER_PKG_SHA}"  "actions-runner-linux-x64-${ACTIONS_RUNNER_VER
 tar --extract --gzip --file="actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz" --directory="${CONTAINER_HOME}"
 
 rm --force "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
-EOF
-
-RUN <<EOF
-# Add Docker's official GPG key:
-apt-get update
-apt-get install --yes --no-install-recommends ca-certificates curl
-install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-chmod a+r /etc/apt/keyrings/docker.asc
-  
-# Add the repository to Apt sources:
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  tee /etc/apt/sources.list.d/docker.list > /dev/null
-apt-get update
-
-apt-get install --yes --no-install-recommends docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 EOF
 
 COPY --chown=nobody:nobody --chmod=0755 docker/entrypoint.sh /usr/local/bin/entrypoint.sh
