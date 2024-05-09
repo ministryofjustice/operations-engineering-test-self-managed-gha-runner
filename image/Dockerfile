@@ -37,7 +37,7 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
 
 COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN echo "${CONTAINER_USER} ALL=(ALL:ALL) NOPASSWD: ALL, !set_no_new_privs" > /etc/sudoers.d/${CONTAINER_USER} \
+RUN echo "${CONTAINER_USER} ALL=(ALL:ALL) NOPASSWD:SETENV: /usr/bin/podman info, /usr/bin/podman build, /usr/bin/podman push, /usr/bin/podman pull, /usr/bin/podman run" > /etc/sudoers.d/${CONTAINER_USER} \
     && chmod 0440 /etc/sudoers.d/${CONTAINER_USER}
 
 USER ${CONTAINER_USER}
