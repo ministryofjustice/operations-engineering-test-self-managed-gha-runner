@@ -45,7 +45,9 @@ USER ${CONTAINER_USER}
 
 # test podman
 
-RUN podman ps && podman info
+RUN cd /proc && ls -l
+
+RUN podman info
 
 WORKDIR ${CONTAINER_HOME}
 
