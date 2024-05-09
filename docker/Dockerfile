@@ -69,7 +69,7 @@ cd slirp4netns/
 ./autogen.sh 
 ./configure
 make
-sudo make install
+make install
 
 EOF
 
