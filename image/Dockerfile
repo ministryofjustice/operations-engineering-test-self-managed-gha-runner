@@ -45,7 +45,9 @@ RUN chmod u+s /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
 USER ${CONTAINER_USER}
 
 # test podman
-RUN podman info --userns=keep-id
+RUN sestatus
+
+RUN podman info
 
 WORKDIR ${CONTAINER_HOME}
 
