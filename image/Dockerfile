@@ -45,9 +45,7 @@ USER ${CONTAINER_USER}
 
 # test podman
 
-RUN mount
-
-RUN podman
+RUN podman ps && podman info
 
 WORKDIR ${CONTAINER_HOME}
 
