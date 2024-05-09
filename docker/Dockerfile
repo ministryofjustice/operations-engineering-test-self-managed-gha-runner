@@ -24,8 +24,6 @@ useradd \
   --create-home \
   ${CONTAINER_USER}
 
-cd home && ls
-
 mkdir --parents ${CONTAINER_HOME}
 
 chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} ${CONTAINER_HOME}
