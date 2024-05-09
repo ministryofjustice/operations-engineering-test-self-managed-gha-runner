@@ -58,20 +58,12 @@ RUN <<EOF
 
 # Configure rootless podman
 
-add-apt-repository ppa:projectatomic/ppa
-apt-get update
-apt-get install --yes --no-install-recommends podman uidmap
-echo "runner:10000:65536" | tee /etc/subuid
-echo "runner:10000:65536" | tee /etc/subgid
-echo -e "[registries.search]\nregistries = ['docker.io']" | tee /etc/containers/registries.conf
+source /etc/os-release
 
-git clone https://github.com/rootless-containers/slirp4netns
-cd slirp4netns/
-./autogen.sh 
-./configure
-make
-make install
-podman run -it --rm debian bash
+sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
+wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_${VERSION_ID}/Release.key -O- | apt-key add -
+apt-get update -qq
+apt-get -qq --yes install podman
 
 EOF
 
