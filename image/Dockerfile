@@ -3,7 +3,6 @@ FROM ubuntu:23.10
 
 ENV CONTAINER_USER="runner" \
     CONTAINER_UID="10000" \
-    CONTAINER_GROUP="runner" \
     CONTAINER_GID="10000" \
     CONTAINER_HOME="/actions-runner" \
     DEBIAN_FRONTEND="noninteractive" \
@@ -12,10 +11,9 @@ ENV CONTAINER_USER="runner" \
 
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
-RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
-  useradd --uid ${CONTAINER_UID} --gid ${CONTAINER_GROUP} --create-home ${CONTAINER_USER} && \  
+RUN useradd --create-home ${CONTAINER_USER} && \  
   mkdir --parents ${CONTAINER_HOME} && \
-  chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} ${CONTAINER_HOME} && \
+  chown --recursive ${CONTAINER_USER} ${CONTAINER_HOME} && \
   apt-get update && apt-get install --yes --no-install-recommends \
   apt-transport-https \
   ca-certificates \
@@ -34,7 +32,7 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
   tar --extract --gzip --file="actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz" --directory="${CONTAINER_HOME}" && \
   rm --force "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
 
-COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY --chown=${CONTAINER_USER} --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN grep runner /etc/subuid /etc/subgid
 
@@ -42,7 +40,7 @@ RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
 RUN grep runner /etc/subuid /etc/subgid
 
-RUN chown ${CONTAINER_USER}:${CONTAINER_GROUP} /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
+RUN chown ${CONTAINER_USER} /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
 
 USER ${CONTAINER_USER}
 
