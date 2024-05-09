@@ -12,25 +12,11 @@ ENV CONTAINER_USER="runner" \
 
 SHELL ["/bin/bash", "-e", "-u", "-o", "pipefail", "-c"]
 
-RUN <<EOF
-groupadd \
-  --gid ${CONTAINER_GID} \
-  --system \
-  ${CONTAINER_GROUP}
-
-useradd \
-  --uid ${CONTAINER_UID} \
-  --gid ${CONTAINER_GROUP} \
-  --create-home \
-  ${CONTAINER_USER}
-
-mkdir --parents ${CONTAINER_HOME}
-
-chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} ${CONTAINER_HOME}
-
-apt-get update
-
-apt-get install --yes --no-install-recommends \
+RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
+  useradd --uid ${CONTAINER_UID} --gid ${CONTAINER_GROUP} --create-home ${CONTAINER_USER} && \  
+  mkdir --parents ${CONTAINER_HOME} && \
+  chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} ${CONTAINER_HOME} && \
+  apt-get update && apt-get install --yes --no-install-recommends \
   apt-transport-https \
   ca-certificates \
   curl \
@@ -38,25 +24,17 @@ apt-get install --yes --no-install-recommends \
   jq \
   libicu-dev \
   lsb-release \
-  podman 
-
-apt-get clean
-
-rm -rf /var/lib/apt/lists/*
-
-curl --location "https://github.com/actions/runner/releases/download/v${ACTIONS_RUNNER_VERSION}/actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz" \
-  --output "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
-
-echo "${ACTIONS_RUNNER_PKG_SHA}"  "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz" | /usr/bin/sha256sum --check
-
-tar --extract --gzip --file="actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz" --directory="${CONTAINER_HOME}"
-
-rm --force "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
+  podman && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* && \
+  curl --location "https://github.com/actions/runner/releases/download/v${ACTIONS_RUNNER_VERSION}/actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz" \
+  --output "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz" && \
+  echo "${ACTIONS_RUNNER_PKG_SHA}"  "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz" | /usr/bin/sha256sum --check && \
+  tar --extract --gzip --file="actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz" --directory="${CONTAINER_HOME}" && \
+  rm --force "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
 
 # test podman
-podman info
-
-EOF
+RUN podman info
 
 COPY --chown=nobody:nobody --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
 
