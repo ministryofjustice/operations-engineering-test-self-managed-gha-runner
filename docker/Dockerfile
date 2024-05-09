@@ -24,7 +24,7 @@ useradd \
   --create-home \
   ${CONTAINER_USER}
 
-su runner
+sudo su runner
 whoami
 pwd
 
