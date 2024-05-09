@@ -24,6 +24,8 @@ useradd \
   --create-home \
   ${CONTAINER_USER}
 
+usermod --add-subuids 200000-201000 --add-subgids 200000-201000 runner
+
 mkdir --parents ${CONTAINER_HOME}
 
 chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} ${CONTAINER_HOME}
