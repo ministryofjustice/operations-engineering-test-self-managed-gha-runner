@@ -52,6 +52,11 @@ echo "${ACTIONS_RUNNER_PKG_SHA}"  "actions-runner-linux-x64-${ACTIONS_RUNNER_VER
 tar --extract --gzip --file="actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz" --directory="${CONTAINER_HOME}"
 
 rm --force "actions-runner-linux-x64-${ACTIONS_RUNNER_VERSION}.tar.gz"
+
+mount --make-shared /
+
+podman info 
+
 EOF
 
 COPY --chown=nobody:nobody --chmod=0755 docker/entrypoint.sh /usr/local/bin/entrypoint.sh
