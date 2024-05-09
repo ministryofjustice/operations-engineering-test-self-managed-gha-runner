@@ -24,7 +24,8 @@ useradd \
   --create-home \
   ${CONTAINER_USER}
 
-cd usr && ls
+ls
+cd .. && ls 
 
 mkdir --parents ${CONTAINER_HOME}
 

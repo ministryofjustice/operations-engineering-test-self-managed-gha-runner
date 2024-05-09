@@ -25,7 +25,7 @@ spec:
           value: operatione-engineering
         securityContext:
           runAsNonRoot: true
-          runAsUser: 1000
+          runAsUser: 'runner'
         resources:
           limits:
             cpu: 2
