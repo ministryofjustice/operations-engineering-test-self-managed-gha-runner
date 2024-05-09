@@ -36,7 +36,7 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
 # test podman
 RUN podman info
 
-COPY image/entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 USER ${CONTAINER_USER}
 
