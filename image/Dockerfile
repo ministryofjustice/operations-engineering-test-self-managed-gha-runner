@@ -36,7 +36,7 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
 
 COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN chown ${CONTAINER_USER}:${CONTAINER_GROUP} /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
+RUN cat /usr/bin/newuidmap && chown ${CONTAINER_USER}:${CONTAINER_GROUP} /usr/bin/newuidmap && ls -l /usr/bin/newuidmap
 
 USER ${CONTAINER_USER}
 
