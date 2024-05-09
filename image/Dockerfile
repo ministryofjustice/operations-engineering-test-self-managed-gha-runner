@@ -38,7 +38,7 @@ COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.
 USER ${CONTAINER_USER}
 
 # test podman
-RUN whoami && podman info
+RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner && podman info
 
 WORKDIR ${CONTAINER_HOME}
 
