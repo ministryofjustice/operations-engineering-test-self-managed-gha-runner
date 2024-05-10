@@ -54,11 +54,10 @@ COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/storage.con
 
 USER ${CONTAINER_USER}
 
-RUN podman info
+RUN ls -al /home && ls -al /home/runner
 
+RUN ls /home/runner 
 WORKDIR ${CONTAINER_HOME}
-
-RUN pwd && ls
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
