@@ -56,7 +56,7 @@ USER ${CONTAINER_USER}
 
 RUN mkdir -p /home/runner/containers && chown ${CONTAINER_USER}:${CONTAINER_GROUP} /home/runner/containers
 
-RUN mkdir -p /home/runner/containers/storage && chown ${CONTAINER_USER}:${CONTAINER_GROUP} /home/runner/containers/storage
+RUN mkdir -p /home/runner/containers/storage
 
 RUN ls /home/runner 
 WORKDIR ${CONTAINER_HOME}
