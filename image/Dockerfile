@@ -45,7 +45,7 @@ RUN cd /usr/bin && ls -l | grep podman && chmod u+s /usr/bin/podman && ls -l /us
 
 RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
-RUN cd /home/runner && ls -l && chowm --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} /home/runner && ls -l /home/runner
+RUN cd /home/runner && ls -l && chown --recursive ${CONTAINER_USER}:${CONTAINER_GROUP} /home/runner && ls -l /home/runner
 
 USER ${CONTAINER_USER}
 
