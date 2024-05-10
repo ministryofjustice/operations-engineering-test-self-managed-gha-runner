@@ -51,6 +51,8 @@ RUN chmod u+s /usr/bin/podman
 
 USER ${CONTAINER_USER}
 
+RUN podman info
+
 WORKDIR ${CONTAINER_HOME}
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
