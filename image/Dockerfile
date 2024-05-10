@@ -27,6 +27,8 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
   lsb-release \
   slirp4netns \
   uidmap \
+  buildah \
+  fuse-overlayfs \
   podman && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
@@ -44,8 +46,8 @@ RUN chmod u+s /usr/bin/podman
 
 RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
-RUN echo “user.max_user_namespaces=28633” > /etc/sysctl.d/userns.conf && \ 	 
-  sysctl -p /etc/sysctl.d/userns.conf
+# check fuse-overlayfs is enabled
+RUN cat /etc/containers/storage.conf && cat ${HOME}/.config/containers/storage.conf
 
 USER ${CONTAINER_USER}
 
