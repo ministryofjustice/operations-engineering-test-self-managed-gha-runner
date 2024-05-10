@@ -28,7 +28,8 @@ spec:
             drop: ["ALL"]
           allowPrivilegeEscalation: false
           seccompProfile: 
-            type: RuntimeDefault
+            type: Localhost
+            localhostProfile: profiles/audit.json
           runAsNonRoot: true
           runAsUser: 10000
         resources:
