@@ -40,7 +40,7 @@ COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.
 RUN echo "${CONTAINER_USER} ALL=(ALL:ALL) NOPASSWD: /usr/bin/podman info, /usr/bin/podman build, /usr/bin/podman push, /usr/bin/podman pull, /usr/bin/podman run" > /etc/sudoers.d/${CONTAINER_USER} && \
     chmod 0440 /etc/sudoers.d/${CONTAINER_USER}
 
-RUN cd /usr/bin/podman && ls && chmod u+s /usr/bin/podman && ls -l /usr/bin/podman && chmod u+s /usr/bin/newuidmap
+RUN cd /usr/bin && ls -l | grep podman && chmod u+s /usr/bin/podman && ls -l /usr/bin/podman && chmod u+s /usr/bin/newuidmap
 
 USER ${CONTAINER_USER}
 
