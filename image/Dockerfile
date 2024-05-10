@@ -46,8 +46,7 @@ RUN chmod u+s /usr/bin/podman
 
 RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
-# check fuse-overlayfs is enabled
-RUN chmod ${CONTAINER_USER}:${CONTAINER_GROUP} /home/runner/actions-runner && cd /home/runner/actions-runner && ls -al
+RUN chown ${CONTAINER_USER}:${CONTAINER_GROUP} /home/runner/actions-runner && cd /home/runner/actions-runner && ls -al
 
 USER ${CONTAINER_USER}
 
