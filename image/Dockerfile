@@ -55,7 +55,7 @@ COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/storage.con
 USER ${CONTAINER_USER}
 
 # test podman
-RUN podman info
+RUN podman unshare && podman info
 
 WORKDIR ${CONTAINER_HOME}
 
