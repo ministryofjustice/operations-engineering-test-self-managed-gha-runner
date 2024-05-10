@@ -44,6 +44,8 @@ RUN chmod u+s /usr/bin/newuidmap
 
 # RUN chmod u+s /usr/bin/podman
 
+RUN ls -l /usr/bin/podman
+
 RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
 RUN mkdir -p /home/runner/.config/containers
