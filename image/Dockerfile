@@ -45,6 +45,8 @@ RUN cd /usr/bin && ls -l | grep podman && chmod u+s /usr/bin/podman && ls -l /us
 
 RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
+RUN ls -l $(which stat)
+
 USER ${CONTAINER_USER}
 
 # test podman
