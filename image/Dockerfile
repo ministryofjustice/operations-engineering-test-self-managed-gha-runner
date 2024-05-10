@@ -53,12 +53,6 @@ RUN chmod u+s /usr/bin/podman
 
 USER ${CONTAINER_USER}
 
-RUN ls -l /run/user/10000/libpod
-
-RUN podman info
-
-RUN ls -l /run/user/10000/libpod
-
 WORKDIR ${CONTAINER_HOME}
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
