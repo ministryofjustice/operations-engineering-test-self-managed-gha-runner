@@ -40,7 +40,7 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
 
 COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN usermod --add-subuids 10000-5000 --add-subgids 10000-5000 runner
+RUN usermod --add-subuids 5000-10000 --add-subgids 5000-10000 runner
 
 COPY image/storage.conf /home/runner/.config/containers/storage.conf
 
