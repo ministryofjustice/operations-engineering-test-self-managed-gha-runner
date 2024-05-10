@@ -27,7 +27,8 @@ spec:
           capabilities:
             drop: ["ALL"]
           allowPrivilegeEscalation: false
-          seccompProfile: "RuntimeDefault"
+          seccompProfile: 
+            type: RuntimeDefault
           runAsNonRoot: true
           runAsUser: 10000
         resources:
