@@ -29,7 +29,7 @@ spec:
           allowPrivilegeEscalation: false
           seccompProfile: 
             type: Localhost
-            localhostProfile: /home/runner/seccomp/profiles/allow_all.json
+            localhostProfile: seccomp/profiles/allow_all.json
           runAsNonRoot: true
           runAsUser: 10000
         resources:
