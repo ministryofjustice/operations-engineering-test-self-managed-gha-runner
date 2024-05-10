@@ -44,14 +44,14 @@ RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
 RUN mkdir -p /home/runner/.config/containers  /home/runner/containers /home/runner/containers/storage /home/runner/containers/storage/libpod
 
+RUN touch /home/runner/containers/storage/libpod/bolt_state.db && chown ${CONTAINER_USER}:${CONTAINER_GROUP} /home/runner/containers/storage/libpod/bolt_state.db
+
 COPY image/storage.conf /home/runner/.config/containers/storage.conf
 
 # workaround: make all users run podman as priveleged otherwise get newuidmap error
 RUN chmod u+s /usr/bin/podman
 
 USER ${CONTAINER_USER}
-
-RUN mkdir /home/runner/test
 
 RUN podman info
 
