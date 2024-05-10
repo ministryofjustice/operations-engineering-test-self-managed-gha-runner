@@ -55,6 +55,8 @@ USER ${CONTAINER_USER}
 
 RUN podman info
 
+RUN ls -l /home/runner/containers/storage/libpod
+
 WORKDIR ${CONTAINER_HOME}
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
