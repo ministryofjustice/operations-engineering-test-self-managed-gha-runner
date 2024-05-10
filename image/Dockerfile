@@ -29,6 +29,7 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
   uidmap \
   buildah \
   fuse-overlayfs \
+  sudo \
   podman && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
@@ -51,7 +52,7 @@ RUN chmod u+s /usr/bin/podman
 
 USER ${CONTAINER_USER}
 
-RUN podman info
+RUN sudo -u runner podman info
 
 WORKDIR ${CONTAINER_HOME}
 
