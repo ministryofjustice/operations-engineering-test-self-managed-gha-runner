@@ -26,6 +26,7 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
   libcap2-bin \
   lsb-release \
   sudo \
+  newuidmap \
   podman && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* && \
