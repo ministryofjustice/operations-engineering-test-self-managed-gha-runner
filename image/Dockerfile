@@ -40,18 +40,13 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
 
 COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
-
-RUN mkdir -p /home/runner/.config/containers /home/runner/containers/storage/libpod /run/user/10000/libpod/tmp
-
-RUN touch /home/runner/containers/storage/libpod/bolt_state.db && chown ${CONTAINER_USER}:${CONTAINER_GROUP} /home/runner/containers/storage/libpod/bolt_state.db
+RUN usermod --add-subuids 10000-5000 --add-subgids 10000-5000 runner
 
 COPY image/storage.conf /home/runner/.config/containers/storage.conf
 
-# workaround: make all users run podman as priveleged otherwise get newuidmap error
-RUN chmod u+s /usr/bin/podman
-
 USER ${CONTAINER_USER}
+
+RUN podman info
 
 WORKDIR ${CONTAINER_HOME}
 
