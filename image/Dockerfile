@@ -53,9 +53,11 @@ RUN chmod u+s /usr/bin/podman
 
 USER ${CONTAINER_USER}
 
+RUN ls -l /run/user/10000/libpod
+
 RUN podman info
 
-RUN ls -l /home/runner/containers/storage/libpod
+RUN ls -l /run/user/10000/libpod
 
 WORKDIR ${CONTAINER_HOME}
 
