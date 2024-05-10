@@ -42,9 +42,7 @@ COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.
 
 RUN ls -l /usr/bin/newuidmap
 
-# RUN chmod u+s /usr/bin/podman
-
-RUN unshare -U sleep 100 && newuidmap $! 0 $(id -u) 1 1 100000 65536 && newgidmap $! 0 $(id -g) 1 1 100000 65536
+RUN chmod u+s /usr/bin/podman
 
 RUN ls -l /usr/bin/podman
 
