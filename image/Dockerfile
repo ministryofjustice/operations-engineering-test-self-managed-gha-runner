@@ -54,9 +54,9 @@ COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/storage.con
 
 USER ${CONTAINER_USER}
 
-RUN ls -al /home && ls -al /home/runner
+RUN mkdir -p /home/runner/containers && chown ${CONTAINER_USER}:${CONTAINER_GROUP} /home/runner/containers
 
-RUn whoami && mkdir /home/runner/containers/storage
+RUN mkdir -p /home/runner/containers/storage && chown ${CONTAINER_USER}:${CONTAINER_GROUP} /home/runner/containers/storage
 
 RUN ls /home/runner 
 WORKDIR ${CONTAINER_HOME}
