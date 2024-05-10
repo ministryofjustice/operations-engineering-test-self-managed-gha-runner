@@ -42,7 +42,7 @@ COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.
 
 RUN chmod u+s /usr/bin/newuidmap
 
-RUN chmod u+s /usr/bin/podman
+# RUN chmod u+s /usr/bin/podman
 
 RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
