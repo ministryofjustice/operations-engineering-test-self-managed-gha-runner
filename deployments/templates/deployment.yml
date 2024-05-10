@@ -29,7 +29,6 @@ spec:
           allowPrivilegeEscalation: false
           seccompProfile: 
             type: Localhost
-            localhostProfile: profiles/audit.json
           runAsNonRoot: true
           runAsUser: 10000
         resources:

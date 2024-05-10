@@ -51,6 +51,8 @@ COPY image/storage.conf /home/runner/.config/containers/storage.conf
 # workaround: make all users run podman as priveleged otherwise get newuidmap error
 RUN chmod u+s /usr/bin/podman
 
+RUN ls /var/lib/kubelet/seccomp/profiles
+
 USER ${CONTAINER_USER}
 
 WORKDIR ${CONTAINER_HOME}
