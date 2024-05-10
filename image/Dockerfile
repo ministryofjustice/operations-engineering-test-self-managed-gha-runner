@@ -56,6 +56,8 @@ USER ${CONTAINER_USER}
 
 RUN ls -al /home && ls -al /home/runner
 
+RUn whoami && mkdir /home/runner/containers/storage
+
 RUN ls /home/runner 
 WORKDIR ${CONTAINER_HOME}
 
