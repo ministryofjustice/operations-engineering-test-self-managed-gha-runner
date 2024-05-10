@@ -40,25 +40,17 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
 
 COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN ls -l /usr/bin/newuidmap
-
-RUN chmod u+s /usr/bin/podman
-
-RUN ls -l /usr/bin/podman
-
 RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
-RUN mkdir -p /home/runner/.config/containers
+RUN mkdir -p /home/runner/.config/containers  /home/runner/containers /home/runner/containers/storage
 
-COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/storage.conf /home/runner/.config/containers/storage.conf
+COPY image/storage.conf /home/runner/.config/containers/storage.conf
+
+# workaround: make all users run podman as priveleged otherwise get newuidmap error
+RUN chmod u+s /usr/bin/podman
 
 USER ${CONTAINER_USER}
 
-RUN mkdir -p /home/runner/containers && chown ${CONTAINER_USER}:${CONTAINER_GROUP} /home/runner/containers
-
-RUN mkdir -p /home/runner/containers/storage
-
-RUN ls /home/runner 
 WORKDIR ${CONTAINER_HOME}
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
