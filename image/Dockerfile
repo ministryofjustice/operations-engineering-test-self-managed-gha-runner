@@ -46,9 +46,9 @@ RUN chmod u+s /usr/bin/podman
 
 RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
-RUN mkdir -p /home/runner/.config/containers/ && \
-  echo '[storage]\ndriver = "overlay"\n\n[storage.options]\nmount_program = "/usr/bin/fuse-overlayfs"' >> /home/runner/.config/containers/storage.conf && \
-  chown ${CONTAINER_USER}:${CONTAINER_GROUP} /home/runner/.config/containers/storage.conf
+RUN mkdir -p /home/runner/.config/containers
+
+COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/storage.conf /home/runner/.config/containers/storage.conf
 
 USER ${CONTAINER_USER}
 

@@ -25,7 +25,6 @@ spec:
           value: operatione-engineering
         securityContext:
           runAsNonRoot: true
-          allowPrivilegeEscalation: true
           runAsUser: 10000
         resources:
           limits:
