@@ -48,8 +48,6 @@ RUN touch /home/runner/containers/storage/libpod/bolt_state.db && chown ${CONTAI
 
 COPY image/storage.conf /home/runner/.config/containers/storage.conf
 
-COPY image/allow_all.json /etc/seccomp/profiles/allow_all.json
-
 # workaround: make all users run podman as priveleged otherwise get newuidmap error
 RUN chmod u+s /usr/bin/podman
 

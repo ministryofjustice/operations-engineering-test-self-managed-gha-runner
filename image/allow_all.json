@@ -1,8 +1,0 @@
-{
-    "defaultAction": "SCMP_ACT_ALLOW",
-    "architectures": [
-      "SCMP_ARCH_NATIVE"
-    ],
-    "syscalls": []
-}
-  

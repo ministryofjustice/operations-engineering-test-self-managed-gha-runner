@@ -28,8 +28,7 @@ spec:
             drop: ["ALL"]
           allowPrivilegeEscalation: false
           seccompProfile: 
-            type: Localhost
-            localhostProfile: seccomp/profiles/allow_all.json
+            type: RuntimeDefault
           runAsNonRoot: true
           runAsUser: 10000
         resources:
