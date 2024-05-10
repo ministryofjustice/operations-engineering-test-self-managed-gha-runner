@@ -58,5 +58,7 @@ RUN podman info
 
 WORKDIR ${CONTAINER_HOME}
 
+RUN pwd && ls
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
