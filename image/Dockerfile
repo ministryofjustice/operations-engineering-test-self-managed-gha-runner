@@ -25,7 +25,7 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
   libicu-dev \
   libcap2-bin \
   lsb-release \
-  sudo \
+  slirp4netns \
   uidmap \
   podman && \
   apt-get clean && \
@@ -38,14 +38,14 @@ RUN groupadd --gid ${CONTAINER_GID} --system ${CONTAINER_GROUP} && \
 
 COPY --chown=${CONTAINER_USER}:${CONTAINER_GROUP} --chmod=0755 image/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-RUN echo "${CONTAINER_USER} ALL=(ALL:ALL) NOPASSWD: /usr/bin/podman info, /usr/bin/podman build, /usr/bin/podman push, /usr/bin/podman pull, /usr/bin/podman run" > /etc/sudoers.d/${CONTAINER_USER} && \
-    chmod 0440 /etc/sudoers.d/${CONTAINER_USER}
+RUN chmod u+s /usr/bin/newuidmap
 
-RUN cd /usr/bin && ls -l | grep podman && chmod u+s /usr/bin/podman && ls -l /usr/bin/podman && chmod u+s /usr/bin/newuidmap
+RUN chmod u+s /usr/bin/podman
 
 RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
 
-RUN ls -l /root/.config/containers/storage.conf && cat /root/.config/containers/storage.conf
+RUN echo “user.max_user_namespaces=28633” > /etc/sysctl.d/userns.conf && \ 	 
+  sysctl -p /etc/sysctl.d/userns.conf
 
 USER ${CONTAINER_USER}
 
