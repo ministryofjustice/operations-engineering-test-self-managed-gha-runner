@@ -43,6 +43,10 @@ RUN echo "${CONTAINER_USER} ALL=(ALL:ALL) NOPASSWD: /usr/bin/podman info, /usr/b
 
 RUN cd /usr/bin && ls -l | grep podman && chmod u+s /usr/bin/podman && ls -l /usr/bin/podman && chmod u+s /usr/bin/newuidmap
 
+RUN usermod --add-subuids 100000-165535 --add-subgids 100000-165535 runner
+
+RUN ls -l /home/runner/.config/containers/storage.conf
+
 USER ${CONTAINER_USER}
 
 # test podman
