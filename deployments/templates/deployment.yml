@@ -24,6 +24,10 @@ spec:
         - name: RUNNER_LABELS
           value: operatione-engineering
         securityContext:
+          capabilities:
+            drop: ["ALL"]
+          allowPrivilegeEscalation: false
+          seccompProfile: "RuntimeDefault"
           runAsNonRoot: true
           runAsUser: 10000
         resources:
