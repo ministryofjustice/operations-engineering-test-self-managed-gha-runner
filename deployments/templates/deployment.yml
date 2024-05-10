@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: actions-runner
+  namespace: ${NAMESPACE}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: actions-runner
+  template:
+    metadata:
+      labels:
+        app: actions-runner
+    spec:
+      containers:
+      - name: runner
+        image: ${REGISTRY}/${REPOSITORY}:${IMAGE_TAG}
+        env:
+        - name: ACCESS_TOKEN
+          value: ${ACCESS_TOKEN}
+        - name: ORG_NAME
+          value: ministryofjustice-test/test-repo-levg
+        - name: RUNNER_LABELS
+          value: operatione-engineering
+        securityContext:
+          capabilities:
+            drop: ["ALL"]
+          allowPrivilegeEscalation: false
+          seccompProfile: 
+            type: RuntimeDefault
+          runAsNonRoot: true
+          runAsUser: 10000
+        resources:
+          limits:
+            cpu: 2
+            memory: 512Mi
+          requests:
+            cpu: 2
+            memory: 256Mi 
+
